@@ -44,11 +44,19 @@ def home():
     print("Home route accessed")  # debug
     return render_template('home.html')
 
+
+
+@app.route('/dashnew')
+def dashb():
+    print("Dashboard route accessed")  # debug
+    return render_template('dashnew.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         print("[INFO] Already logged in, redirecting to dashboard")
-        return redirect(url_for('home'))
+        return redirect(url_for('dashb'))
 
     
     if request.method == 'POST':
@@ -66,7 +74,7 @@ def login():
             flash('Invalid username or password')
             print("[WARN] Login failed")
     
-    return render_template('login.html')
+    return render_template('dashnew.html')
 
 @app.route('/logout')
 def logout():
