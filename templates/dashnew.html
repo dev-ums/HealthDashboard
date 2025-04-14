@@ -157,7 +157,29 @@
             <div class="form-check"><input class="form-check-input" type="checkbox" value="Walk normally" id="walk"><label class="form-check-label" for="walk">Walk normally</label></div>
             <div class="form-check"><input class="form-check-input" type="checkbox" value="Write normally" id="write"><label class="form-check-label" for="write">Write normally</label></div>
         
-            <button type="submit" class="btn btn-success mt-3">Check Probability</button>
+            document.getElementById('symptomForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const checkboxes = document.querySelectorAll('#symptomForm input[type="checkbox"]:checked');
+                const selectedSymptoms = Array.from(checkboxes).map(cb => cb.value);
+            
+                fetch('/api/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symptoms: selectedSymptoms })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // Display the prediction results
+                    document.getElementById('probability-result').innerHTML = `
+                        <h4>Prediction</h4>
+                        <p>Disease: <strong>${data.disease}</strong></p>
+                        <div class="meter">
+                            <div class="meter-fill" id="prediction-meter"></div>
+                        </div>
+                    `;
+                });
+            });
+        </script>            
         </form>
         <hr>
         <h5 class="mt-4">Symptoms Selected</h5> 
@@ -208,6 +230,8 @@
 
             <div class="mt-3 mb-2">Common Cold</div>
             <div class="meter"><div class="meter-fill bg-info" id="cold-meter"></div></div>
+            <div id="probability-result" class="mt-4"></div>
+
         </div>
     </div>
 
