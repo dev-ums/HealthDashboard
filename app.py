@@ -6,7 +6,6 @@ import os
 # Load the NHS 100 diseases data
 with open(os.path.join(os.path.dirname(__file__), 'nhs_top_100_diseases.json')) as f:
     nhs_diseases = json.load(f)
-    nhs_diseases = {k.strip().lower(): v for k, v in nhs_diseases.items()}
 
 
 with open(os.path.join(os.path.dirname(__file__), 'maharashtra_hospitals.json')) as f:
