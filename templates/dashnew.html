@@ -327,39 +327,21 @@
                 card.classList.add("card", "p-2", "mb-2");
                 card.innerHTML = `
                         <strong>${result.disease}</strong><br>
-                        Matches: ${result.match_count}/${result.total_symptoms}<br>
-                        Probability: ${result.probability}%
-                        <div class="progress mt-2">
-                            <div class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: ${result.probability}%;">
-                                 ${result.probability}%
-                            </div>
-                        </div>
+                        Probability: ${result.probability.toFixed(2)}%<br>
+                        Recommended Action: ${
+                          result.recommended_action || "Consult a doctor."
+                        }
                     `;
                 outputDiv.appendChild(card);
               });
-
-              // Optionally, you could also update the meter elements if the API provides those values:
-              // Example assuming the API returns an object with keys for 'flu', 'covid', 'cold'
-              if (data.probabilities) {
-                document.getElementById("flu-meter").style.width =
-                  data.probabilities.flu + "%";
-                document.getElementById("covid-meter").style.width =
-                  data.probabilities.covid + "%";
-                document.getElementById("cold-meter").style.width =
-                  data.probabilities.cold + "%";
-              }
             })
             .catch((err) => {
-              console.error("Error fetching prediction:", err);
+              console.error("Error predicting symptoms:", err);
+              const outputDiv = document.getElementById("disease-probability");
+              outputDiv.innerHTML =
+                "<p>Error predicting symptoms. Please try again later.</p>";
             });
         });
-
-      // (Optional) Initialize all meter fills to 0 width on page load
-      document.querySelectorAll(".meter-fill").forEach((meter) => {
-        meter.style.width = "0%";
-      });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
