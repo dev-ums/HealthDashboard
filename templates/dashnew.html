@@ -43,41 +43,36 @@
             <button class="btn btn-primary mt-2" type="submit">Search</button>
         </form>
         
-        <input type="text" id="city-input" placeholder="Enter your city" />
-<button onclick="fetchHospitals()">Find Hospitals</button>
-
-<div id="hospital-sidebar"></div>
-
-<script>
-  function fetchHospitals() {
-    const city = document.getElementById('city-input').value.trim().toLowerCase();
-
-    fetch(`/api/hospitals?city=${city}`)
-      .then(response => response.json())
-      .then(data => {
-        const sidebar = document.getElementById('hospital-sidebar');
-        sidebar.innerHTML = ''; // Clear previous results
-
-        if (data.length === 0) {
-          sidebar.innerHTML = '<p>No hospitals found for this city.</p>';
-        } else {
-          data.forEach(hospital => {
-            const div = document.createElement('div');
-            div.innerHTML = `
-              <h4>${hospital.name}</h4>
-              <p>${hospital.address}</p>
-              <hr>
-            `;
-            sidebar.appendChild(div);
-          });
-        }
-      })
-      .catch(err => {
-        console.error('Error fetching hospitals:', err);
-      });
-  }
-</script>
-
+        <div id="hospital-info" class="mt-3"></div>
+        
+        <script>
+        document.getElementById('cityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const city = document.getElementById('city').value.trim().toLowerCase();
+        
+            fetch(`/api/hospitals?city=${city}`)
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('hospital-info');
+                    container.innerHTML = '';
+        
+                    if (data.length === 0) {
+                        container.innerHTML = `<p>No hospitals found for "<strong>${city}</strong>".</p>`;
+                        return;
+                    }
+        
+                    data.forEach(hospital => {
+                        container.innerHTML += `
+                            <div class="card mb-2 p-2">
+                                <strong>${hospital.name}</strong><br>
+                                ${hospital.address}<br>
+                                Phone: ${hospital.phone || 'N/A'}
+                            </div>
+                        `;
+                    });
+                });
+        });
+        </script>
         <hr>
         <h5>Health Tips</h5>   
         <ul class="list-unstyled">
