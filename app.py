@@ -3,6 +3,12 @@ import os
 
 # Load hospital data on startup
 # Normalize keys to lowercase
+# Load the NHS 100 diseases data
+with open(os.path.join(os.path.dirname(__file__), 'nhs_top_100_diseases.json')) as f:
+    nhs_diseases = json.load(f)
+    nhs_diseases = {k.strip().lower(): v for k, v in nhs_diseases.items()}
+
+
 with open(os.path.join(os.path.dirname(__file__), 'maharashtra_hospitals.json')) as f:
     raw_data = json.load(f)
     hospitals_by_city = {k.strip().lower(): v for k, v in raw_data.items()}
@@ -48,6 +54,34 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Flask routes
+
+from flask import request, jsonify
+
+@app.route('/api/predict', methods=['POST'])
+def predict_disease():
+    data = request.get_json()
+    selected_symptoms = [s.strip().lower() for s in data.get('symptoms', [])]
+
+    results = []
+    for disease in nhs_diseases:
+        disease_symptoms = [s.lower() for s in disease['symptoms']]
+        match_count = len(set(selected_symptoms) & set(disease_symptoms))
+        if match_count == 0:
+            continue
+        probability = round((match_count / len(disease_symptoms)) * 100, 2)
+        results.append({
+            "disease": disease["disease"],
+            "match_count": match_count,
+            "total_symptoms": len(disease_symptoms),
+            "probability": probability
+        })
+
+    # Sort and return top 5 matches
+    results.sort(key=lambda x: x['probability'], reverse=True)
+    return jsonify(results[:5])
+
+
+
 @app.route('/')
 def home():
     print("Home route accessed")  # debug
