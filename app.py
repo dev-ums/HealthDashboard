@@ -8,7 +8,7 @@ with open(os.path.join(os.path.dirname(__file__), 'nhs_top_100_diseases.json')) 
     nhs_diseases = json.load(f)
 
 
-with open(os.path.join(os.path.dirname(__file__), 'maharashtra_hospitals.json')) as f:
+with open(os.path.join(os.path.dirname(__file__), 'static/export.json')) as f:
     raw_data = json.load(f)
     hospitals_by_city = {k.strip().lower(): v for k, v in raw_data.items()}
 

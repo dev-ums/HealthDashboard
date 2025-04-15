@@ -54,58 +54,63 @@
       <div id="hospital-info" class="mt-3"></div>
 
       <script>
-        document
-          .getElementById("cityForm")
-          .addEventListener("submit", function (e) {
-            e.preventDefault();
-            const city = document
-              .getElementById("city")
-              .value.trim()
-              .toLowerCase();
-
-            fetch(`/api/hospitals?city=${city}`)
-              .then((res) => res.json())
-              .then((data) => {
-                const container = document.getElementById("hospital-info");
-                container.innerHTML = "";
-
-                if (data.length === 0) {
-                  container.innerHTML = `<p>No hospitals found for "<strong>${city}</strong>".</p>`;
-                  return;
-                }
-
-                data.forEach((hospital) => {
-                  container.innerHTML += `
-                                <div class="card mb-2 p-2">
-                                    <strong>${hospital.name}</strong><br>
-                                    ${hospital.address}<br>
-                                    Phone: ${hospital.phone || "N/A"}
-                                </div>
-                            `;
-                });
+        document.getElementById("cityForm").addEventListener("submit", function (e) {
+          e.preventDefault();
+          const city = document.getElementById("city").value.trim().toLowerCase();
+      
+          fetch("/static/export.json")
+            .then((res) => res.json())
+            .then((data) => {
+              const container = document.getElementById("hospital-info");
+              container.innerHTML = "";
+      
+              const filteredHospitals = data.filter(
+                (hospital) => hospital.city.toLowerCase() === city
+              );
+      
+              if (filteredHospitals.length === 0) {
+                container.innerHTML = `<p>No hospitals found for "<strong>${city}</strong>".</p>`;
+                return;
+              }
+      
+              filteredHospitals.forEach((hospital) => {
+                container.innerHTML += `
+                  <div class="card mb-2 p-2">
+                    <strong>${hospital.name}</strong><br>
+                    ${hospital.address}<br>
+                    Phone: ${hospital.phone || "N/A"}
+                  </div>
+                `;
               });
-          });
+            })
+            .catch((error) => {
+              console.error("Error loading hospital data:", error);
+              document.getElementById("hospital-info").innerHTML =
+                "<p>Error loading hospital data. Please try again later.</p>";
+            });
+        });
       </script>
+      
       <hr />
       <h5>Health Tips</h5>
       <ul class="list-unstyled">
-        <li><a href="#">Stay Hydrated</a></li>
-        <li><a href="#">Eat a Balanced Diet</a></li>
-        <li><a href="#">Exercise Regularly</a></li>
-        <li><a href="#">Get Enough Sleep</a></li>
-        <li><a href="#">Practice Good Hygiene</a></li>
-        <li><a href="#">Avoid Smoking and Excessive Alcohol</a></li>
-        <li><a href="#">Regular Health Check-ups</a></li>
-        <li><a href="#">Mental Health Awareness</a></li>
-        <li><a href="#">Stay Informed About Vaccinations</a></li>
-        <li><a href="#">Limit Screen Time</a></li>
-        <li><a href="#">Practice Mindfulness and Relaxation Techniques</a></li>
-        <li><a href="#">Stay Connected with Loved Ones</a></li>
-        <li><a href="#">Seek Help When Needed</a></li>
-        <li><a href="#">Know Your Family Medical History</a></li>
-        <li><a href="#">Be Aware of Allergies</a></li>
-        <li><a href="#">Follow Safety Guidelines</a></li>
-        <li><a href="#">Stay Updated on Health News</a></li>
+        <li>Stay Hydrated</li>
+        <li>Eat a Balanced Diet</li>
+        <li>Exercise Regularly</li>
+        <li>Get Enough Sleep</li>
+        <li>Practice Good Hygiene</li>
+        <li>Avoid Smoking and Excessive Alcohol</li>
+        <li>Regular Health Check-ups</li>
+        <li>Mental Health Awareness</li>
+        <li>Stay Informed About Vaccinations</li>
+        <li>Limit Screen Time</li>
+        <li>Practice Mindfulness and Relaxation Techniques</li>
+        <li>Stay Connected with Loved Ones</li>
+        <li>Seek Help When Needed</li>
+        <li>Know Your Family Medical History</li>
+        <li>Be Aware of Allergies</li>
+        <li>Follow Safety Guidelines</li>
+        <li>Stay Updated on Health News</li>
       </ul>
     </div>
 
