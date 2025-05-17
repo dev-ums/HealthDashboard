@@ -86,10 +86,13 @@ def home():
     print("Home route accessed")  # debug
     return render_template('home.html')
 
+# ... (previous imports remain the same)
+
 @app.route('/predict', methods=['POST'])
 def predict():
     symptoms = request.form.getlist('symptoms')
-
+    
+    # Expanded disease scoring with better symptom mapping
     disease_scores = {
         "Common Cold": 0,
         "Flu": 0,
@@ -97,48 +100,85 @@ def predict():
         "COVID-19": 0,
         "Gastroenteritis": 0,
         "Hypertension": 0,
-        "Diabetes": 0,
-        "Depression": 0,
+        "Diabetes Type 2": 0,
         "Asthma": 0,
-        "Urinary Tract Infection (UTI)": 0,
-        "Arthritis": 0,
-        "Skin Allergy": 0,
+        "Urinary Tract Infection": 0,
+        "Irritable Bowel Syndrome": 0,
+        "Eczema": 0
     }
 
+    symptom_mapping = {
+        # Flu symptoms
+        "fever": ["Flu", "COVID-19"],
+        "cough": ["Flu", "COVID-19", "Asthma"],
+        "sore throat": ["Flu", "Common Cold"],
+        "fatigue": ["Flu", "COVID-19", "Diabetes Type 2"],
+        "headache": ["Flu", "Migraine", "Hypertension"],
+        
+        # Common Cold symptoms
+        "sneezing": ["Common Cold"],
+        "stuffy nose": ["Common Cold"],
+        "mild headache": ["Common Cold"],
+        
+        # COVID-19 symptoms
+        "dry cough": ["COVID-19"],
+        "loss of taste or smell": ["COVID-19"],
+        "breathlessness": ["COVID-19", "Asthma"],
+        
+        # Asthma symptoms
+        "shortness of breath": ["Asthma"],
+        "wheezing": ["Asthma"],
+        "chest tightness": ["Asthma"],
+        
+        # Diabetes symptoms
+        "increased thirst": ["Diabetes Type 2"],
+        "frequent urination": ["Diabetes Type 2", "Urinary Tract Infection"],
+        "blurred vision": ["Diabetes Type 2", "Hypertension"],
+        "tiredness": ["Diabetes Type 2"],
+        
+        # Hypertension symptoms
+        "dizziness": ["Hypertension"],
+        "nosebleeds": ["Hypertension"],
+        
+        # Migraine symptoms
+        "nausea": ["Migraine"],
+        "vomiting": ["Migraine"],
+        "sensitivity to light": ["Migraine"],
+        "aura": ["Migraine"],
+        
+        # UTI symptoms
+        "burning urination": ["Urinary Tract Infection"],
+        "pelvic pain": ["Urinary Tract Infection"],
+        "cloudy urine": ["Urinary Tract Infection"],
+        
+        # IBS symptoms
+        "abdominal pain": ["Irritable Bowel Syndrome"],
+        "bloating": ["Irritable Bowel Syndrome"],
+        "diarrhea": ["Irritable Bowel Syndrome"],
+        "constipation": ["Irritable Bowel Syndrome"],
+        
+        # Eczema symptoms
+        "itchy skin": ["Eczema"],
+        "dry patches": ["Eczema"],
+        "redness": ["Eczema"],
+        "rash": ["Eczema"]
+    }
+
+    # Score diseases based on selected symptoms
     for symptom in symptoms:
         s = symptom.lower()
-        if "fever" in s or "chills" in s:
-            disease_scores["Flu"] += 2
-            disease_scores["COVID-19"] += 2
-            disease_scores["Common Cold"] += 1
-        if "head" in s or "migraine" in s:
-            disease_scores["Migraine"] += 3
-        if "cough" in s or "short of breath" in s:
-            disease_scores["COVID-19"] += 2
-            disease_scores["Asthma"] += 1
-        if "abdomen" in s or "vomit" in s or "nauseated" in s:
-            disease_scores["Gastroenteritis"] += 3
-            disease_scores["UTI"] += 1
-        if "tired" in s or "weak" in s:
-            disease_scores["Diabetes"] += 2
-            disease_scores["Depression"] += 1
-            disease_scores["Hypertension"] += 1
-        if "dry" in s or "thirsty" in s:
-            disease_scores["Diabetes"] += 3
-        if "sleep" in s:
-            disease_scores["Depression"] += 2
-        if "pain" in s or "leg" in s or "back" in s or "joint" in s:
-            disease_scores["Arthritis"] += 2
-        if "itch" in s or "scratch" in s or "skin" in s:
-            disease_scores["Skin Allergy"] += 3
-        if "urinate" in s or "pelvis" in s:
-            disease_scores["UTI"] += 2
+        if s in symptom_mapping:
+            for disease in symptom_mapping[s]:
+                disease_scores[disease] += 1
 
-    # Normalize to probabilities (simple scaling)
-    total = sum(disease_scores.values()) + 1e-5  # avoid divide by zero
-    probabilities = {disease: round((score / total) * 100, 2) for disease, score in disease_scores.items()}
+    # Normalize to percentages
+    max_score = max(disease_scores.values()) or 1  # prevent division by zero
+    probabilities = {disease: round((score / max_score) * 100, 2) 
+                    for disease, score in disease_scores.items()}
 
-    return render_template('dashboard.html', disease_probabilities=probabilities, checked_symptoms=symptoms)
+    return render_template('dashboard.html', 
+                         disease_probabilities=probabilities, 
+                         checked_symptoms=symptoms)
 
 
 @app.route('/dashnew')
@@ -181,19 +221,18 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        print(f"[DEBUG] Registering user: {username}")
         
         if User.query.filter_by(username=username).first():
             flash('Username already exists')
-            print("[WARN] Username already exists")
         else:
             user = User(username=username)
             user.set_password(password)
             db.session.add(user)
             db.session.commit()
             flash('Registration successful! Please login.')
-            print("[INFO] Registration successful")
-            return redirect('/login')
+            return redirect(url_for('login'))
+    
+    return render_template('register.html') 
 
 from flask import jsonify, request
 

@@ -14,14 +14,15 @@
       }
       .sidebar {
         width: 250px;
-        background-color: #f8f9fa;
+        background-color: #e6f3ff;
         padding: 1rem;
-        border-right: 1px solid #ddd;
+        border-right: 1px solid #eef1f9;
       }
       .main-content {
         flex: 1;
         padding: 2rem;
-      }
+        background-color: #ffffff;
+     }
       .meter {
         height: 20px;
         background: #e0e0e0;
@@ -118,88 +119,148 @@
     <div class="main-content">
       <h2 class="mb-4">Symptom Checker</h2>
       <form id="symptomForm">
-        <h5>By What Hurts</h5>
+        <h5>Primary Symptoms</h5>
         <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Abdomen"
-            id="abdomen"
-          />
-          <label class="form-check-label" for="abdomen">Abdomen</label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Back"
-            id="back"
-          />
-          <label class="form-check-label" for="back">Back</label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Chest"
-            id="chest"
-          />
-          <label class="form-check-label" for="chest">Chest</label>
-        </div>
-        <!-- Add more checkboxes as needed -->
-
-        <h5 class="mt-4">Based on How They Feel</h5>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Chills"
-            id="chills"
-          />
-          <label class="form-check-label" for="chills">Chills</label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Fever"
-            id="fever"
-          />
+          <input class="form-check-input" type="checkbox" value="fever" id="fever">
           <label class="form-check-label" for="fever">Fever</label>
         </div>
         <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Paresthesia"
-            id="paresthesia"
-          />
-          <label class="form-check-label" for="paresthesia"
-            >Paresthesia (numbness, tingling, electric tweaks)</label
-          >
-        </div>
-        <!-- Add more checkboxes as needed -->
-
-        <h5 class="mt-4">Based on What They Can't Do</h5>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Breathe normally"
-            id="breathe"
-          />
-          <label class="form-check-label" for="breathe">Breathe normally</label>
+          <input class="form-check-input" type="checkbox" value="cough" id="cough">
+          <label class="form-check-label" for="cough">Cough</label>
         </div>
         <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Hear normally"
-            id="hear"
-          />
-          <label class="form-check-label" for="hear">Hear normally</label>
+          <input class="form-check-input" type="checkbox" value="sore throat" id="sore-throat">
+          <label class="form-check-label" for="sore-throat">Sore Throat</label>
         </div>
-        <!-- Add more checkboxes as needed -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="fatigue" id="fatigue">
+          <label class="form-check-label" for="fatigue">Fatigue</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="headache" id="headache">
+          <label class="form-check-label" for="headache">Headache</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="sneezing" id="sneezing">
+          <label class="form-check-label" for="sneezing">Sneezing</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="stuffy nose" id="stuffy-nose">
+          <label class="form-check-label" for="stuffy-nose">Stuffy Nose</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="mild headache" id="mild-headache">
+          <label class="form-check-label" for="mild-headache">Mild Headache</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="dry cough" id="dry-cough">
+          <label class="form-check-label" for="dry-cough">Dry Cough</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="loss of taste or smell" id="loss-of-taste-or-smell">
+          <label class="form-check-label" for="loss-of-taste-or-smell">Loss of Taste or Smell</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="breathlessness" id="breathlessness">
+          <label class="form-check-label" for="breathlessness">Breathlessness</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="shortness of breath" id="shortness-of-breath">
+          <label class="form-check-label" for="shortness-of-breath">Shortness of Breath</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="wheezing" id="wheezing">
+          <label class="form-check-label" for="wheezing">Wheezing</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="chest tightness" id="chest-tightness">
+          <label class="form-check-label" for="chest-tightness">Chest Tightness</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="increased thirst" id="increased-thirst">
+          <label class="form-check-label" for="increased-thirst">Increased Thirst</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="frequent urination" id="frequent-urination">
+          <label class="form-check-label" for="frequent-urination">Frequent Urination</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="tiredness" id="tiredness">
+          <label class="form-check-label" for="tiredness">Tiredness</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="blurred vision" id="blurred-vision">
+          <label class="form-check-label" for="blurred-vision">Blurred Vision</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="dizziness" id="dizziness">
+          <label class="form-check-label" for="dizziness">Dizziness</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="nosebleeds" id="nosebleeds">
+          <label class="form-check-label" for="nosebleeds">Nosebleeds</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="nausea" id="nausea">
+          <label class="form-check-label" for="nausea">Nausea</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="vomiting" id="vomiting">
+          <label class="form-check-label" for="vomiting">Vomiting</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="sensitivity to light" id="sensitivity-to-light">
+          <label class="form-check-label" for="sensitivity-to-light">Sensitivity to Light</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="aura" id="aura">
+          <label class="form-check-label" for="aura">Aura</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="burning urination" id="burning-urination">
+          <label class="form-check-label" for="burning-urination">Burning Urination</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pelvic pain" id="pelvic-pain">
+          <label class="form-check-label" for="pelvic-pain">Pelvic Pain</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="cloudy urine" id="cloudy-urine">
+          <label class="form-check-label" for="cloudy-urine">Cloudy Urine</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="abdominal pain" id="abdominal-pain">
+          <label class="form-check-label" for="abdominal-pain">Abdominal Pain</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="bloating" id="bloating">
+          <label class="form-check-label" for="bloating">Bloating</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="diarrhea" id="diarrhea">
+          <label class="form-check-label" for="diarrhea">Diarrhea</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="constipation" id="constipation">
+          <label class="form-check-label" for="constipation">Constipation</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="itchy skin" id="itchy-skin">
+          <label class="form-check-label" for="itchy-skin">Itchy Skin</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="dry patches" id="dry-patches">
+          <label class="form-check-label" for="dry-patches">Dry Patches</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="redness" id="redness">
+          <label class="form-check-label" for="redness">Redness</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="rash" id="rash">
+          <label class="form-check-label" for="rash">Rash</label>
+        </div>
+        
 
         <button class="btn btn-primary mt-3" type="submit">Submit</button>
       </form>
@@ -276,77 +337,143 @@
 
       <div class="mt-4">
         <h5>Possible Disease Probability</h5>
-        <!-- These meter elements can be updated by the API response if needed -->
+        <!-- These meter elements will be updated by the API response -->
         <div class="mb-2">Flu</div>
         <div class="meter">
           <div class="meter-fill" id="flu-meter"></div>
         </div>
-        <div class="mt-3 mb-2">COVID-19</div>
-        <div class="meter">
-          <div class="meter-fill bg-warning" id="covid-meter"></div>
-        </div>
+        
         <div class="mt-3 mb-2">Common Cold</div>
         <div class="meter">
-          <div class="meter-fill bg-info" id="cold-meter"></div>
+          <div class="meter-fill bg-info" id="common-cold-meter"></div>
         </div>
+        
+        <div class="mt-3 mb-2">COVID-19</div>
+        <div class="meter">
+          <div class="meter-fill bg-warning" id="covid-19-meter"></div>
+        </div>
+        
+        <div class="mt-3 mb-2">Asthma</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="asthma-meter"></div>
+        </div>
+
+        <div class="mt-3 mb-2">Diabetes Type 2</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="diabetes-type-2-meter"></div>
+        </div>
+
+        <div class="mt-3 mb-2">Hypertension</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="hypertension-meter"></div>
+        </div>
+
+        <div class="mt-3 mb-2">Migraine</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="migraine-meter"></div>
+        </div>
+      
+        <div class="mt-3 mb-2">Urinary Tract Infection</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="urinary-tract-infection-meter"></div>
+        </div>
+
+        <div class="mt-3 mb-2">Irritable Bowel Syndrome</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="irritable-bowel-syndrome-meter"></div>
+        </div>
+
+        <div class="mt-3 mb-2">Eczema</div>
+        <div class="meter">
+          <div class="meter-fill bg-secondary" id="eczema-meter"></div>
+        </div>
+
         <!-- Container for showing detailed prediction cards -->
         <div id="disease-probability" class="mt-4"></div>
       </div>
-    </div>
-
-    <script>
-      // Consolidated event listener for symptom form submission
-      document
-        .getElementById("symptomForm")
-        .addEventListener("submit", function (e) {
+      
+      <script>
+        document.getElementById("symptomForm").addEventListener("submit", function(e) {
           e.preventDefault();
-
-          // Get selected symptoms
           const selected = Array.from(
-            document.querySelectorAll(
-              '#symptomForm input[type="checkbox"]:checked'
-            )
-          ).map((cb) => cb.value);
-
-          // Post the selected symptoms to the prediction API endpoint
-          fetch("/api/predict", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ symptoms: selected }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              const outputDiv = document.getElementById("disease-probability");
-              outputDiv.innerHTML = "";
-
-              // If data is empty, show a "not found" message
-              if (!data || (Array.isArray(data) && data.length === 0)) {
-                outputDiv.innerHTML = "<p>No matching conditions found.</p>";
-                return;
-              }
-
-              // Assume data is an array of prediction objects
-              data.forEach((result) => {
-                // Create a card for each prediction
-                const card = document.createElement("div");
-                card.classList.add("card", "p-2", "mb-2");
-                card.innerHTML = `
-                        <strong>${result.disease}</strong><br>
-                        Probability: ${result.probability.toFixed(2)}%<br>
-                        Recommended Action: ${
-                          result.recommended_action || "Consult a doctor."
-                        }
-                    `;
-                outputDiv.appendChild(card);
+            document.querySelectorAll('#symptomForm input[type="checkbox"]:checked')
+          ).map((cb) => cb.value.toLowerCase());
+          
+          // Disease to symptoms mapping from the JSON data
+          const diseaseMap = {
+            "Flu": ["fever", "cough", "sore throat", "fatigue", "headache"],
+            "Common Cold": ["sneezing", "stuffy nose", "sore throat", "mild headache"],
+            "COVID-19": ["fever", "dry cough", "fatigue", "loss of taste or smell", "breathlessness"],
+            "Asthma": ["shortness of breath", "wheezing", "chest tightness", "cough"],
+            "Diabetes Type 2": ["increased thirst", "frequent urination", "tiredness", "blurred vision"],
+            "Hypertension": ["headache", "dizziness", "nosebleeds", "blurred vision"],
+            "Migraine": ["headache", "nausea", "vomiting", "sensitivity to light", "aura"],
+            "Urinary Tract Infection": ["burning urination", "frequent urination", "pelvic pain", "cloudy urine"],
+            "Irritable Bowel Syndrome": ["abdominal pain", "bloating", "diarrhea", "constipation"],
+            "Eczema": ["itchy skin", "dry patches", "redness", "rash"]
+          };
+      
+          const outputDiv = document.getElementById("disease-probability");
+          outputDiv.innerHTML = "";
+          
+          let predictionResults = [];
+          
+          for (const [disease, symptoms] of Object.entries(diseaseMap)) {
+            const matchCount = symptoms.filter(symptom => 
+              selected.includes(symptom.toLowerCase())
+            ).length;
+            
+            const probability = (matchCount / symptoms.length) * 100;
+            
+            if (probability > 0) { // Only show diseases with some probability
+              predictionResults.push({
+                disease,
+                probability,
+                recommended_action: probability > 50 ? 
+                  "High probability. Consult a doctor immediately." : 
+                  "Possible match. Monitor symptoms and consult if they worsen."
               });
-            })
-            .catch((err) => {
-              console.error("Error predicting symptoms:", err);
-              const outputDiv = document.getElementById("disease-probability");
-              outputDiv.innerHTML =
-                "<p>Error predicting symptoms. Please try again later.</p>";
-            });
+              
+              // Update meters visually
+              const meterId = disease.toLowerCase().replace(/ /g, "-") + "-meter";
+              const meter = document.getElementById(meterId);
+              if (meter) {
+                meter.style.width = probability + "%";
+                // Add color classes based on probability
+                if (probability > 70) {
+                  meter.classList.add("bg-danger");
+                } else if (probability > 30) {
+                  meter.classList.add("bg-warning");
+                } else {
+                  meter.classList.add("bg-info");
+                }
+              }
+            }
+          }
+          
+          if (predictionResults.length === 0 || selected.length === 0) {
+            outputDiv.innerHTML = "<p>No matching conditions found based on your symptoms.</p>";
+            return;
+          }
+          
+          // Sort by highest probability first
+          predictionResults.sort((a, b) => b.probability - a.probability);
+          
+          predictionResults.forEach(result => {
+            const card = document.createElement("div");
+            card.classList.add("card", "p-3", "mb-3");
+            card.innerHTML = `
+              <h6><strong>${result.disease}</strong></h6>
+              <div class="progress mb-2">
+                <div class="progress-bar" role="progressbar" style="width: ${result.probability}%" 
+                     aria-valuenow="${result.probability}" aria-valuemin="0" aria-valuemax="100">
+                  ${result.probability.toFixed(0)}%
+                </div>
+              </div>
+              <p class="mb-0"><small>${result.recommended_action}</small></p>
+            `;
+            outputDiv.appendChild(card);
+          });
         });
-    </script>
-  </body>
-</html>
+      </script>
+      
